@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Rongmu Sun is a first year graduate student from Georgetown University majoring in DSAN. She recieved her undergraduate degree in George Mason University in BS, Accounting in 2023. She’s new to the DSAN field and now still exploring her interest.\n\n\n\nimage.png\n\n\n\n\n\nBig fan of SEVENTEEN.\nLove Video Games: Apex, Valorant, League of Legend, steam games etc.\nAnimations.\n\n\n\n\nEmail: rs2264@georgetown.edu\nPhone: (571)259-6817\nInstagram: srongmu\nLinkedIn: Rongmu Sun"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "This is the Homework 1 of DSAN 5000.\nThis site includes a brief self-introduction page and a Data Science Topic page.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html#rongmu-sun",
+    "href": "about.html#rongmu-sun",
+    "title": "Introduction",
+    "section": "",
+    "text": "Rongmu Sun is a first year graduate student from Georgetown University majoring in DSAN. She recieved her undergraduate degree in George Mason University in BS, Accounting in 2023. She’s new to the DSAN field and now still exploring her interest.\n\n\n\nimage.png"
+  },
+  {
+    "objectID": "about.html#hobbies-and-interests",
+    "href": "about.html#hobbies-and-interests",
+    "title": "Introduction",
+    "section": "",
+    "text": "Big fan of SEVENTEEN.\nLove Video Games: Apex, Valorant, League of Legend, steam games etc.\nAnimations."
+  },
+  {
+    "objectID": "about.html#contact-information",
+    "href": "about.html#contact-information",
+    "title": "Introduction",
+    "section": "",
+    "text": "Email: rs2264@georgetown.edu\nPhone: (571)259-6817\nInstagram: srongmu\nLinkedIn: Rongmu Sun"
+  },
+  {
+    "objectID": "website-template/pages/markdown-cheatsheet/cheatsheet.html",
+    "href": "website-template/pages/markdown-cheatsheet/cheatsheet.html",
+    "title": "Markdown Cheat Sheet",
+    "section": "",
+    "text": "Thanks for visiting The Markdown Guide!\nThis Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic syntax and extended syntax.\n\n\nThese are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements."
+  },
+  {
+    "objectID": "website-template/pages/markdown-cheatsheet/cheatsheet.html#basic-syntax",
+    "href": "website-template/pages/markdown-cheatsheet/cheatsheet.html#basic-syntax",
+    "title": "Markdown Cheat Sheet",
+    "section": "",
+    "text": "These are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements."
+  },
+  {
+    "objectID": "website-template/pages/markdown-cheatsheet/cheatsheet.html#h2",
+    "href": "website-template/pages/markdown-cheatsheet/cheatsheet.html#h2",
+    "title": "Markdown Cheat Sheet",
+    "section": "H2",
+    "text": "H2\n\nH3\n\n\nBold\nbold text\n\n\nItalic\nitalicized text\n\n\nBlockquote\n\nblockquote\n\n\n\nOrdered List\n\nFirst item\nSecond item\nThird item\n\n\n\nUnordered List\n\nFirst item\nSecond item\nThird item\n\n\n\nCode\ncode\n\n\nHorizontal Rule\n\n\n\nLink\nMarkdown Guide\n\n\nImage\nIMAGE ON YOUR COMPUTER (RELATIVE PATH)\n\n\n\nalt text\n\n\nIMAGE FROM ONLINE\n\n\n\nalt text"
+  },
+  {
+    "objectID": "website-template/pages/markdown-cheatsheet/cheatsheet.html#extended-syntax",
+    "href": "website-template/pages/markdown-cheatsheet/cheatsheet.html#extended-syntax",
+    "title": "Markdown Cheat Sheet",
+    "section": "Extended Syntax",
+    "text": "Extended Syntax\nThese elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.\n\nTable\n\n\n\nSyntax\nDescription\n\n\n\n\nHeader\nTitle\n\n\nParagraph\nText\n\n\n\n\n\nFenced Code Block\n{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"age\": 25\n}\n\n\nFootnote\nHere’s a sentence with a footnote. 1\n\n\nHeading ID\n\n\nMy Great Heading\n\n\nDefinition List\n\nterm\n\ndefinition\n\n\n\n\nStrikethrough\nThe world is flat.\n\n\nTask List\n\nWrite the press release\nUpdate the website\nContact the media\n\n\n\nEmoji\nThat is so funny! :joy:\n(See also Copying and Pasting Emoji)\n\n\nHighlight\nI need to highlight these ==very important words==.\n\n\nSubscript\nH2O\n\n\nSuperscript\nX2"
+  },
+  {
+    "objectID": "website-template/pages/markdown-cheatsheet/cheatsheet.html#footnotes",
+    "href": "website-template/pages/markdown-cheatsheet/cheatsheet.html#footnotes",
+    "title": "Markdown Cheat Sheet",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThis is the footnote.↩︎"
+  },
+  {
+    "objectID": "Data Science Topic.html",
+    "href": "Data Science Topic.html",
+    "title": "DSAN5000-Lab1.2",
+    "section": "",
+    "text": "This topic will mainly discuss the performance of each type of content in the social media. The type of content would include videos, images, stories, plain texts, etc. The performance of the content would be measured in several perspectives such as the customer engagement (comments, likes, shares, etc.) or the influence (especially for some brand advertises). By understanding which type of content (or combination of types) performs the best in customer engagement would help brand to increase their advertise influence and maximize the profit brought by their ads. There might be already some researches related to the similar content, but the type of content develops rapidly now and there are many different contents (stories) that still lack of research. For example, instead of limiting categories like videos, pictures, I will separate videos into long videos versus short videos, (videos from tiktok or YouTube). I am assuming that short videos may corresponds to a higher performance as most people do not have the patience to watch a long video, or there might be other content format that ignored by people but performs better."
+  },
+  {
+    "objectID": "Data Science Topic.html#topic-measure-the-content-performance-on-social-media",
+    "href": "Data Science Topic.html#topic-measure-the-content-performance-on-social-media",
+    "title": "DSAN5000-Lab1.2",
+    "section": "",
+    "text": "This topic will mainly discuss the performance of each type of content in the social media. The type of content would include videos, images, stories, plain texts, etc. The performance of the content would be measured in several perspectives such as the customer engagement (comments, likes, shares, etc.) or the influence (especially for some brand advertises). By understanding which type of content (or combination of types) performs the best in customer engagement would help brand to increase their advertise influence and maximize the profit brought by their ads. There might be already some researches related to the similar content, but the type of content develops rapidly now and there are many different contents (stories) that still lack of research. For example, instead of limiting categories like videos, pictures, I will separate videos into long videos versus short videos, (videos from tiktok or YouTube). I am assuming that short videos may corresponds to a higher performance as most people do not have the patience to watch a long video, or there might be other content format that ignored by people but performs better."
+  },
+  {
+    "objectID": "Data Science Topic.html#two-academic-articles",
+    "href": "Data Science Topic.html#two-academic-articles",
+    "title": "DSAN5000-Lab1.2",
+    "section": "Two academic articles",
+    "text": "Two academic articles\n\nImplementing social media marketing strategically: an empirical assessment [gomez2019integrated]\nABSTRACT The purpose of this study is to examine how firms implement social media systematically to drive strategic marketing actions. To this end, the study conceptualises social media implementation as a multidimensional, organisational construct composed of social media strategy, active presence, customer engagement initiatives and social media analytics. Using primary data, the study operationalises the social media implementation construct and tests its effect on firm performance isolated into social media performance and marketing performance. The results indicate that all except the active presence dimension of social media implementation are positively related to social media performance. The results further indicate that social media performance is positively related to marketing performance. The study contributes to the literature by offering a novel conceptualisation and empirical validation of the social media implementation construct.\n\n\nAn integrated model of social media brand engagement [tafesse2018implementing]\nAbstract Despite the increasing use of social media sites to engage consumers, the consumer brand engagement construct is still in its infancy. This study aims to contribute to existing social media research by proposing and empirically testing a model in which social media brand involvement and social media brand communication are the main precursors and brand relationship quality is a relevant outcome of social media brand engagement. The findings show that the influence of social media brand involvement on social media brand engagement is stronger than the influence of social media brand communication. The latter is due to the co-creation of users and firms. Furthermore, interaction and attention are the most relevant components of social media brand engagement, followed by enthusiasm, identification, and absorption. Social media brand engagement is a useful tool for companies to gain competitive advantages. Thus, the findings could help firms better manage their social media tools in the context of social media communication."
+  },
+  {
+    "objectID": "Data Science Topic.html#questions",
+    "href": "Data Science Topic.html#questions",
+    "title": "DSAN5000-Lab1.2",
+    "section": "Questions:",
+    "text": "Questions:\n\nThe popular format of content in social media in 2020s?\nThe classification of different format of content?\nThe model to measure the performance of the content?\nThe best time frame for data? Recent 5 years? 8 years?\nThe data type that could support this research?\nHow to make different formats of content that have different kinds of data to be consistent?\nWhich format would be most popular?\nWhich format is the most effective in customer engagement?\nHow to weight different type of data (number of comment, likes, shares)?\nWhich format performs best in bringing profit for brand or content poster?"
+  }
+]
