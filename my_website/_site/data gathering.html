@@ -154,6 +154,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-gathering" id="toc-data-gathering" class="nav-link active" data-scroll-target="#data-gathering">Data Gathering</a>
   <ul class="collapse">
   <li><a href="#link-for-raw-data" id="toc-link-for-raw-data" class="nav-link" data-scroll-target="#link-for-raw-data">link for raw data</a></li>
+  <li><a href="#python-api" id="toc-python-api" class="nav-link" data-scroll-target="#python-api">Python API</a></li>
+  <li><a href="#r-api" id="toc-r-api" class="nav-link" data-scroll-target="#r-api">R API</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -183,7 +185,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="link-for-raw-data" class="level2">
 <h2 class="anchored" data-anchor-id="link-for-raw-data">link for raw data</h2>
 <p>https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&amp;symbol=IBM&amp;month=2023-09&amp;interval=60min&amp;outputsize=full&amp;apikey={api_key}&amp;datatype=csv</p>
-<div class="cell" data-execution_count="26">
+</section>
+<section id="python-api" class="level2">
+<h2 class="anchored" data-anchor-id="python-api">Python API</h2>
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO </span>
@@ -206,7 +211,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error: Unable to retrieve CSV data from Alpha Vantage API"</span>)</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'./data/sample.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'../data/sample_py.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="r-api" class="level2">
+<h2 class="anchored" data-anchor-id="r-api">R API</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load required libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>library(httr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>library(readr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'demo' with your own Alpha Vantage API key</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">&lt;-</span> <span class="st">"PMPL4GDC4VRLN6XJ"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the API endpoint</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">&lt;-</span> paste0(<span class="st">"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&amp;symbol=IBM&amp;month=2023-09&amp;interval=60min&amp;outputsize=full&amp;apikey="</span>, api_key, <span class="st">"&amp;datatype=csv"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the API request</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>response <span class="op">&lt;-</span> GET(url)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the request was successful</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (http_status(response)$category <span class="op">==</span> <span class="st">"Success"</span>) {</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the CSV data</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    csv_data <span class="op">&lt;-</span> content(response, <span class="st">"text"</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    df <span class="op">&lt;-</span> read_csv(csv_data)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Save the data to CSV</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  write_csv(df, <span class="st">"../data/sample_r.csv"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Error: Unable to retrieve CSV data from Alpha Vantage API"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 316 Columns: 6
+-- Column specification --------------------------------------------------------
+Delimiter: ","
+dbl  (5): open, high, low, close, volume
+dttm (1): timestamp
+
+i Use `spec()` to retrieve the full column specification for this data.
+i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 
 
