@@ -10,7 +10,11 @@ website:
       - href: about.ipynb
         text: About me
       - href: Data Science Topic.ipynb
-        text: Introduction
+        text: Data Science Topic
+      - href: data gathering.ipynb
+        text: Data Gathering
+      - href: data cleaning.ipynb
+        text: Data Cleaning
 
 format:
   html:
