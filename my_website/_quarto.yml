@@ -15,6 +15,8 @@ website:
         text: Data Gathering
       - href: data cleaning.ipynb
         text: Data Cleaning
+      - href: Naïve Bayes.ipynb
+        text: Naïve Bayes
 
 format:
   html:

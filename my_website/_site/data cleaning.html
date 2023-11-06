@@ -93,9 +93,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -162,7 +159,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a></li>
   <li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis">Correlation Analysis</a></li>
   <li><a href="#hypothesis-generation" id="toc-hypothesis-generation" class="nav-link" data-scroll-target="#hypothesis-generation">Hypothesis Generation</a></li>
-  <li><a href="#data-grouping-and-segmentation" id="toc-data-grouping-and-segmentation" class="nav-link" data-scroll-target="#data-grouping-and-segmentation">Data Grouping and Segmentation</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -190,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="data-cleaning" class="level1">
 <h1>Data Cleaning</h1>
-<div class="cell" data-execution_count="66">
+<div class="cell" data-execution_count="110">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#For AAPL dataset</span></span>
@@ -205,7 +201,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>AAPL[<span class="st">'daily_return'</span>] <span class="op">=</span> AAPL[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>AAPL.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>AAPL.head()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>AAPL.to_csv(<span class="st">'AAPL_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -222,81 +220,8 @@ close        float64
 volume         int64
 dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="66">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>171.00</td>
-<td>174.2300</td>
-<td>170.13</td>
-<td>173.97</td>
-<td>56807811</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>169.35</td>
-<td>170.9000</td>
-<td>167.90</td>
-<td>170.77</td>
-<td>44846017</td>
-<td>-1.839398</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>169.02</td>
-<td>171.1700</td>
-<td>168.87</td>
-<td>170.29</td>
-<td>51130955</td>
-<td>-0.281080</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>166.91</td>
-<td>168.9600</td>
-<td>166.83</td>
-<td>168.22</td>
-<td>58499129</td>
-<td>-1.215573</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>170.37</td>
-<td>171.3775</td>
-<td>165.67</td>
-<td>166.89</td>
-<td>70625258</td>
-<td>-0.790631</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="67">
+<div class="cell" data-execution_count="109">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For MSFT dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>MSFT <span class="op">=</span> pd.read_csv(<span class="st">'MSFT_six_months_data.csv'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -309,7 +234,9 @@ dtype: object</code></pre>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>MSFT[<span class="st">'daily_return'</span>] <span class="op">=</span> MSFT[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>MSFT.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>MSFT.head()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>MSFT.to_csv(<span class="st">'MSFT_Cleaned.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -326,81 +253,8 @@ close        float64
 volume         int64
 dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="67">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>339.680</td>
-<td>347.41</td>
-<td>339.6600</td>
-<td>346.07</td>
-<td>28103396</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>338.850</td>
-<td>339.00</td>
-<td>334.6900</td>
-<td>338.11</td>
-<td>20265282</td>
-<td>-2.300113</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>333.410</td>
-<td>339.45</td>
-<td>331.8300</td>
-<td>337.31</td>
-<td>22828082</td>
-<td>-0.236609</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>330.425</td>
-<td>336.72</td>
-<td>328.4007</td>
-<td>329.81</td>
-<td>29856522</td>
-<td>-2.223474</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>340.540</td>
-<td>341.63</td>
-<td>326.9400</td>
-<td>327.89</td>
-<td>37828543</td>
-<td>-0.582153</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="68">
+<div class="cell" data-execution_count="111">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For GOOGL dataset</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>GOOGL <span class="op">=</span> pd.read_csv(<span class="st">'GOOGL_six_months_data.csv'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -413,7 +267,9 @@ dtype: object</code></pre>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>GOOGL[<span class="st">'daily_return'</span>] <span class="op">=</span> GOOGL[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>GOOGL.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>GOOGL.head()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>GOOGL.to_csv(<span class="st">'GOOGL_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -430,81 +286,8 @@ close        float64
 volume         int64
 dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="68">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>124.00</td>
-<td>126.4844</td>
-<td>123.7150</td>
-<td>126.45</td>
-<td>30019389</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>125.06</td>
-<td>125.3700</td>
-<td>122.6850</td>
-<td>124.08</td>
-<td>26292342</td>
-<td>-1.874259</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>123.21</td>
-<td>125.4000</td>
-<td>122.7500</td>
-<td>124.46</td>
-<td>28940081</td>
-<td>0.306254</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>122.88</td>
-<td>123.3100</td>
-<td>120.2057</td>
-<td>122.17</td>
-<td>44566506</td>
-<td>-1.839949</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>123.27</td>
-<td>124.3297</td>
-<td>121.2700</td>
-<td>122.28</td>
-<td>57061140</td>
-<td>0.090038</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="69">
+<div class="cell" data-execution_count="112">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For AMZN dataset</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AMZN <span class="op">=</span> pd.read_csv(<span class="st">'AMZN_six_months_data.csv'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -517,7 +300,9 @@ dtype: object</code></pre>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>AMZN[<span class="st">'daily_return'</span>] <span class="op">=</span> AMZN[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>AMZN.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>AMZN.head()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>AMZN.to_csv(<span class="st">'AMZN_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -534,81 +319,8 @@ close        float64
 volume         int64
 dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="69">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>133.98</td>
-<td>137.3400</td>
-<td>133.855</td>
-<td>137.00</td>
-<td>61417463</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>132.75</td>
-<td>133.5700</td>
-<td>131.710</td>
-<td>133.09</td>
-<td>51589380</td>
-<td>-2.854015</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>129.72</td>
-<td>133.0000</td>
-<td>128.560</td>
-<td>132.71</td>
-<td>72485542</td>
-<td>-0.285521</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>126.20</td>
-<td>130.0200</td>
-<td>125.520</td>
-<td>127.74</td>
-<td>125309313</td>
-<td>-3.745008</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>120.63</td>
-<td>121.6393</td>
-<td>118.350</td>
-<td>119.57</td>
-<td>100419516</td>
-<td>-6.395804</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="70">
+<div class="cell" data-execution_count="113">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For META dataset</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>META <span class="op">=</span> pd.read_csv(<span class="st">'META_six_months_data.csv'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -621,7 +333,9 @@ dtype: object</code></pre>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>META[<span class="st">'daily_return'</span>] <span class="op">=</span> META[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>META.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>META.head()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>META.to_csv(<span class="st">'META_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -638,81 +352,8 @@ close        float64
 volume         int64
 dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="70">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>302.00</td>
-<td>312.7400</td>
-<td>301.850</td>
-<td>311.85</td>
-<td>20144919</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>303.31</td>
-<td>303.6800</td>
-<td>296.860</td>
-<td>301.27</td>
-<td>19434168</td>
-<td>-3.392657</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>299.09</td>
-<td>309.3967</td>
-<td>299.050</td>
-<td>302.66</td>
-<td>28435053</td>
-<td>0.461380</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>294.48</td>
-<td>299.3100</td>
-<td>292.970</td>
-<td>296.73</td>
-<td>29596256</td>
-<td>-1.959294</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>295.00</td>
-<td>295.0000</td>
-<td>279.403</td>
-<td>288.35</td>
-<td>66684141</td>
-<td>-2.824116</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="71">
+<div class="cell" data-execution_count="114">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For TSLA dataset</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>TSLA <span class="op">=</span> pd.read_csv(<span class="st">'TSLA_six_months_data.csv'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -726,7 +367,8 @@ dtype: object</code></pre>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate daily return</span></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>TSLA[<span class="st">'daily_return'</span>] <span class="op">=</span> TSLA[<span class="st">'close'</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>TSLA.head()</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>TSLA.to_csv(<span class="st">'TSLA_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>timestamp    0
 open         0
@@ -742,79 +384,6 @@ low          float64
 close        float64
 volume         int64
 dtype: object</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="71">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">timestamp</th>
-<th data-quarto-table-cell-role="th">open</th>
-<th data-quarto-table-cell-role="th">high</th>
-<th data-quarto-table-cell-role="th">low</th>
-<th data-quarto-table-cell-role="th">close</th>
-<th data-quarto-table-cell-role="th">volume</th>
-<th data-quarto-table-cell-role="th">daily_return</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2023-11-01</td>
-<td>204.03</td>
-<td>205.98</td>
-<td>197.85</td>
-<td>205.66</td>
-<td>121131225</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2023-10-31</td>
-<td>196.12</td>
-<td>202.80</td>
-<td>194.07</td>
-<td>200.84</td>
-<td>118068273</td>
-<td>-2.343674</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2023-10-30</td>
-<td>209.28</td>
-<td>210.88</td>
-<td>194.67</td>
-<td>197.36</td>
-<td>136448167</td>
-<td>-1.732723</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2023-10-27</td>
-<td>210.60</td>
-<td>212.41</td>
-<td>205.77</td>
-<td>207.30</td>
-<td>94881173</td>
-<td>5.036482</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2023-10-26</td>
-<td>211.32</td>
-<td>214.80</td>
-<td>204.88</td>
-<td>205.76</td>
-<td>115112635</td>
-<td>-0.742885</td>
-</tr>
-</tbody>
-</table>
-
-</div>
 </div>
 </div>
 <div class="cell" data-execution_count="72">
@@ -1054,39 +623,6 @@ max   296.040000  299.290000  289.520100  293.340000     10.787372</code></pre>
 <h3 class="anchored" data-anchor-id="hypothesis-generation">Hypothesis Generation</h3>
 <p>Can intraday price ranges be used to predict next-day stock volatility?</p>
 <p>Hypothesis: There is a positive correlation between the intraday high-low spread and the volatility of the stock on the following day.</p>
-</section>
-<section id="data-grouping-and-segmentation" class="level3">
-<h3 class="anchored" data-anchor-id="data-grouping-and-segmentation">Data Grouping and Segmentation</h3>
-<div class="cell" data-execution_count="96">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>AAPL_weekly <span class="op">=</span> AAPL.resample(<span class="st">'W-FRI'</span>).last()  </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>AAPL_weekly[[<span class="st">'weekly_return'</span>, <span class="st">'weekly_volatility'</span>]].plot(subplots<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Weekly Analysis'</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df_weekly[<span class="st">'weekly_return'</span>] <span class="op">=</span> df_weekly[<span class="st">'close'</span>].pct_change()  </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>df_weekly[<span class="st">'weekly_volatility'</span>] <span class="op">=</span> df_weekly[<span class="st">'weekly_return'</span>].rolling(window<span class="op">=</span><span class="dv">4</span>).std() </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>df_monthly <span class="op">=</span> df.resample(<span class="st">'M'</span>).last()  </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>df_monthly[<span class="st">'monthly_return'</span>] <span class="op">=</span> df_monthly[<span class="st">'close'</span>].pct_change() </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>df_monthly[<span class="st">'monthly_volatility'</span>] <span class="op">=</span> df_monthly[<span class="st">'monthly_return'</span>].rolling(window<span class="op">=</span><span class="dv">12</span>).std()</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>df_quarterly <span class="op">=</span> df.resample(<span class="st">'Q'</span>).last()</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>df_quarterly[<span class="st">'quarterly_return'</span>] <span class="op">=</span> df_quarterly[<span class="st">'close'</span>].pct_change()</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>df_quarterly[<span class="st">'quarterly_volatility'</span>] <span class="op">=</span> df_quarterly[<span class="st">'quarterly_return'</span>].rolling(window<span class="op">=</span><span class="dv">4</span>).std()</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>df_weekly[[<span class="st">'weekly_return'</span>, <span class="st">'weekly_volatility'</span>]].plot(subplots<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Weekly Analysis'</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>df_monthly[[<span class="st">'monthly_return'</span>, <span class="st">'monthly_volatility'</span>]].plot(subplots<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Monthly Analysis'</span>)</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>df_quarterly[[<span class="st">'quarterly_return'</span>, <span class="st">'quarterly_volatility'</span>]].plot(subplots<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Quarterly Analysis'</span>)</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>ImportError: cannot import name 'warn_alias_replacement' from 'pandas.core.apply' (/Users/srongmu/anaconda3/lib/python3.10/site-packages/pandas/core/apply.py)</code></pre>
-</div>
-</div>
 
 
 </section>
