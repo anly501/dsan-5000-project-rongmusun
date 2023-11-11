@@ -17,6 +17,10 @@ website:
         text: Data Cleaning
       - href: Naïve Bayes.ipynb
         text: Naïve Bayes
+      - href: Dimensionality reduction.ipynb
+        text: Dimensionality reduction
+      - href: Clustering.ipynb
+        text: Clustering
 
 format:
   html:
