@@ -21,6 +21,8 @@ website:
         text: Dimensionality reduction
       - href: Clustering.ipynb
         text: Clustering
+      - href: Decision Tree.ipynb
+        text: Decision Tree
 
 format:
   html:
