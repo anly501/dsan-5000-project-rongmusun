@@ -2,19 +2,25 @@ project:
   type: website
 
 website:
-  title: "5000 Homework 1"
+  title: "Stock Price Analysis"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - href: about.ipynb
         text: About me
+      - href: code.ipynb
+        text: Code
+      - href: data.ipynb
+        text: Data
       - href: Data Science Topic.ipynb
-        text: Data Science Topic
+        text: Introduction
       - href: data gathering.ipynb
         text: Data Gathering
       - href: data cleaning.ipynb
         text: Data Cleaning
+      - href: eda.ipynb
+        text: Data Exploration
       - href: Naïve Bayes.ipynb
         text: Naïve Bayes
       - href: Dimensionality reduction.ipynb
@@ -23,6 +29,8 @@ website:
         text: Clustering
       - href: Decision Tree.ipynb
         text: Decision Tree
+      - href: Conclusion
+        text: Conclusion
 
 format:
   html:

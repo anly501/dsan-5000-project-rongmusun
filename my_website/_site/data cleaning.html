@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5000 Homework 1 - Data Cleaning</title>
+<title>Stock Price Analysis - Data Cleaning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">5000 Homework 1</span>
+    <span class="navbar-title">Stock Price Analysis</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -124,8 +124,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./code.html" rel="" target="">
+ <span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html" rel="" target="">
+ <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Data Science Topic.html" rel="" target="">
- <span class="menu-text">Data Science Topic</span></a>
+ <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./data gathering.html" rel="" target="">
@@ -134,6 +142,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link active" href="./data cleaning.html" rel="" target="" aria-current="page">
  <span class="menu-text">Data Cleaning</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Naïve Bayes.html" rel="" target="">
@@ -167,16 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link active" data-scroll-target="#data-cleaning">Data Cleaning</a>
-  <ul class="collapse">
-  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a>
-  <ul class="collapse">
-  <li><a href="#distriptive-statistics" id="toc-distriptive-statistics" class="nav-link" data-scroll-target="#distriptive-statistics">Distriptive Statistics</a></li>
-  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a></li>
-  <li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis">Correlation Analysis</a></li>
-  <li><a href="#hypothesis-generation" id="toc-hypothesis-generation" class="nav-link" data-scroll-target="#hypothesis-generation">Hypothesis Generation</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link active" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
   </ul>
 </nav>
     </div>
@@ -202,6 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="data-cleaning" class="level1">
 <h1>Data Cleaning</h1>
+<p>In this section, we will check the raw data and clean the data that we gathered for our analysis.</p>
+<p>First, we need to check null values for each datasets. As we can see, the data we gain from this API do not have any Null values, then we need to calculate daily return for each row, to make the dataset not time-sensitive.</p>
 <div class="cell" data-execution_count="110">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -402,247 +407,8 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="72">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Drop volumn column</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>MSFT <span class="op">=</span> MSFT.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>GOOGL <span class="op">=</span> GOOGL.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>AMZN <span class="op">=</span> AMZN.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>META <span class="op">=</span> META.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>TSLA <span class="op">=</span> TSLA.drop(<span class="st">'volume'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="eda" class="level2">
-<h2 class="anchored" data-anchor-id="eda">EDA</h2>
-<section id="distriptive-statistics" class="level3">
-<h3 class="anchored" data-anchor-id="distriptive-statistics">Distriptive Statistics</h3>
-<div class="cell" data-execution_count="73">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Summary statistics for Data</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>summary_statistics_AAPL <span class="op">=</span> AAPL.describe()</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> AAPL.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>summary_statistics_AAPL <span class="op">=</span> AAPL[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>summary_statistics_MSFT <span class="op">=</span> MSFT.describe()</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> MSFT.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>summary_statistics_MSFT <span class="op">=</span> MSFT[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>summary_statistics_GOOGL <span class="op">=</span> GOOGL.describe()</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> GOOGL.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>summary_statistics_GOOGL <span class="op">=</span> GOOGL[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>summary_statistics_AMZN <span class="op">=</span> AMZN.describe()</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> AMZN.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>summary_statistics_AMZN <span class="op">=</span> AMZN[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>summary_statistics_META <span class="op">=</span> META.describe()</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> META.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>summary_statistics_META <span class="op">=</span> META[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>summary_statistics_TSLA <span class="op">=</span> TSLA.describe()</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>columns_to_include <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> TSLA.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'volume'</span>]</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>summary_statistics_TSLA <span class="op">=</span> TSLA[columns_to_include].describe().drop(<span class="st">'count'</span>)</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_AAPL)</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_MSFT)</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_GOOGL)</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_AMZN)</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_META)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_statistics_TSLA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            open        high         low       close  daily_return
-mean  180.497573  182.016635  179.110013  180.585403      0.004905
-std     7.666419    7.603430    7.683683    7.581467      1.201368
-min   166.910000  168.960000  165.670000  166.890000     -2.258081
-25%   173.995000  175.690000  173.162500  174.420000     -0.775974
-50%   178.395000  180.120000  177.217500  178.665000     -0.126516
-75%   186.755000  188.135000  185.065000  187.162500      0.710672
-max   196.235000  198.230000  195.280000  196.450000      5.044233
-            open        high         low       close  daily_return
-mean  329.248129  332.421206  326.081446  329.164395     -0.082502
-std    10.424783   10.871145    9.758547   10.254954      1.454917
-min   308.000000  309.905000  306.090000  307.000000     -3.827645
-25%   321.450000  325.357475  319.920875  321.875000     -0.933508
-50%   331.055000  333.430000  327.120000  329.815000     -0.166908
-75%   335.222500  338.450000  332.885000  335.925000      0.741900
-max   361.750000  366.780000  352.435000  359.490000      3.910945
-            open        high         low       close  daily_return
-mean  127.470927  129.022405  126.258075  127.643468     -0.113071
-std     7.345721    7.142713    7.210315    7.182428      1.852893
-min   105.180000  107.960000  105.160000  107.350000     -5.461437
-25%   122.362500  123.976250  121.195000  122.325000     -1.082018
-50%   128.335000  129.317500  126.890000  128.240000     -0.100464
-75%   133.357500  134.687500  131.940000  133.847500      0.848728
-max   141.050000  141.220000  138.580000  140.550000     10.508717
-            open        high         low       close  daily_return
-mean  128.983661  130.550713  127.459491  129.020242     -0.188504
-std     7.986347    7.903721    7.828463    7.879146      2.060386
-min   105.040000  106.095000  104.700100  105.830000     -7.637745
-25%   125.557500  127.363750  124.130000  125.975000     -1.540472
-50%   129.580000  131.252500  128.204700  129.255000     -0.122718
-75%   133.995000  135.627500  132.822500  134.262500      0.913674
-max   145.080000  145.860000  142.950000  144.850000      5.906582
-            open        high         low       close  daily_return
-mean  291.056734  295.337216  287.171990  291.285524     -0.218422
-std    23.982296   23.841979   22.977277   23.244562      1.870259
-min   231.415000  235.620000  230.270000  233.080000     -4.230675
-25%   280.902500  285.582500  277.255000  281.782500     -1.445339
-50%   297.830000  301.090000  293.350000  297.815000     -0.173350
-75%   307.420000  312.084750  301.685000  307.005000      0.877795
-max   328.000000  330.540000  322.950000  327.820000      4.459209
-            open        high         low       close  daily_return
-mean  240.241921  245.035196  235.691160  240.501855     -0.098334
-std    31.794378   31.973045   31.228469   31.588256      3.112003
-min   165.650000  169.518400  164.350000  166.350000     -9.167337
-25%   220.613400  225.567500  216.215000  219.887500     -1.756820
-50%   249.850000  255.394950  244.535000  250.670000     -0.102090
-75%   261.102500  267.400000  257.319325  261.312500      1.699834
-max   296.040000  299.290000  289.520100  293.340000     10.787372</code></pre>
-</div>
-</div>
-</section>
-<section id="visualizations" class="level3">
-<h3 class="anchored" data-anchor-id="visualizations">Visualizations</h3>
-<div class="cell" data-execution_count="75">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Line plot for closing price for each company</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>AAPL[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(AAPL[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>AAPL.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>MSFT[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(MSFT[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>MSFT.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>GOOGL[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(GOOGL[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>GOOGL.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>AMZN[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(AMZN[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>AMZN.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>META[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(META[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>META.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>TSLA[<span class="st">'timestamp'</span>] <span class="op">=</span> pd.to_datetime(TSLA[<span class="st">'timestamp'</span>])</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>TSLA.set_index(<span class="st">'timestamp'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>closing_prices <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AAPL'</span>: AAPL[<span class="st">'close'</span>],</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MSFT'</span>: MSFT[<span class="st">'close'</span>],</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GOOGL'</span>: GOOGL[<span class="st">'close'</span>],</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AMZN'</span>: AMZN[<span class="st">'close'</span>],</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'META'</span>: META[<span class="st">'close'</span>],</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TSLA'</span>: TSLA[<span class="st">'close'</span>]</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">8</span>))</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ticker <span class="kw">in</span> closing_prices.columns:</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    plt.plot(closing_prices.index, closing_prices[ticker], label<span class="op">=</span>ticker)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Closing Prices Over Time'</span>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Price (USD)'</span>)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="78">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution for daily return</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> AAPL.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    sns.histplot(AAPL[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> MSFT.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    sns.histplot(MSFT[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> GOOGL.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    sns.histplot(GOOGL[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> AMZN.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    sns.histplot(AMZN[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> META.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    sns.histplot(META[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> TSLA.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'daily_return$'</span>).columns:</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    sns.histplot(TSLA[column].dropna(), bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribution of Daily Returns for </span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-3.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-4.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-5.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-11-output-6.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="88">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>daily_returns <span class="op">=</span> closing_prices.pct_change().dropna()</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>daily_returns)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Box Plot of Daily Returns for Different Stocks'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Daily Return'</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="correlation-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="correlation-analysis">Correlation Analysis</h3>
-<div class="cell" data-execution_count="87">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> daily_returns.corr()</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlation_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, linewidths<span class="op">=</span><span class="fl">.5</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Correlation Matrix for Daily Returns of Stocks'</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="data cleaning_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="hypothesis-generation" class="level3">
-<h3 class="anchored" data-anchor-id="hypothesis-generation">Hypothesis Generation</h3>
-<p>Can intraday price ranges be used to predict next-day stock volatility?</p>
-<p>Hypothesis: There is a positive correlation between the intraday high-low spread and the volatility of the stock on the following day.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

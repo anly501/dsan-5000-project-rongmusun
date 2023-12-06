@@ -1,9 +1,16 @@
 ---
-title: "Homework 1"
+title: "Stock Price Analysis"
 ---
 
-This is the Homework 1 of DSAN 5000.
+Welcome! This website is the final portfolio project of DSAN 5000.
 
-This site includes a brief self-introduction page and a Data Science Topic page.
+This website includes many components, mainly in three sections.
 
-To learn more about this project visit github <https://github.com/anly501/dsan-5000-project-rongmusun>.
+The first section provides the introductory information for me and the background of this analysis, including About me, Data, Code, Introduction and a Data Science Topic page.
+
+The second section provides the preparation of data related to this analysis, including Data Gathering, Data Cleaning, and EDAs.
+
+The third section is the main part of this analysis, contains multiple analysis on the data, including Naive Bayes, Dimensionality reduction, Clustering, Decision tree. 
+
+The last section provides the conclusion of this analysis. 
+
