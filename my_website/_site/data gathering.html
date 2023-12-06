@@ -144,6 +144,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Data Cleaning</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Naïve Bayes.html" rel="" target="">
  <span class="menu-text">Naïve Bayes</span></a>
   </li>  
@@ -158,6 +162,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./Decision Tree.html" rel="" target="">
  <span class="menu-text">Decision Tree</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html" rel="" target="">
+ <span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -213,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="api">API</h2>
 <p>Initially, we will source our primary dataset from Alpha Vantage, focusing on the stock prices of six prominent high-tech companies – “AAPL, MSFT, GOOGL, AMZN, META, TSLA”, over the recent half-year period. These datasets serve as the base for our exploratory analysis, enabling us to look at the current market trends and behaviors specific to the technology sector.</p>
 <p>To get the access of these datasets, we need to get our API key from AlphaVantage, then get the authentication of accessing the data.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span>
@@ -311,7 +319,7 @@ Data stored for TSLA for the recent 6 months.</code></pre>
 </div>
 </div>
 <p>We will also look at the real market trend in the United States, thus we also need the data for real gdp per capita to represent the current market trend.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f'https://www.alphavantage.co/query?function=REAL_GDP_PER_CAPITA&amp;outputsize=full&amp;apikey=</span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">&amp;datatype=csv'</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> requests.get(url)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> r.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
@@ -331,12 +339,12 @@ Data stored for TSLA for the recent 6 months.</code></pre>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Data stored for the recent 6 months."</span>)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No data to store."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Data stored for the recent 6 months.</code></pre>
+<div class="cell-output cell-output-error">
+<pre><code>KeyError: 'timestamp'</code></pre>
 </div>
 </div>
 <p>The last dataset we need is the news for Apple, which we will use to find out the relationship between news or events to stock price in the future.</p>
-<div class="cell" data-execution_count="22">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span>

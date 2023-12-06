@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5000 Homework 1 - Decision Tree</title>
+<title>Stock Price Analysis - Decision Tree</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">5000 Homework 1</span>
+    <span class="navbar-title">Stock Price Analysis</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,8 +127,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./code.html" rel="" target="">
+ <span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html" rel="" target="">
+ <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Data Science Topic.html" rel="" target="">
- <span class="menu-text">Data Science Topic</span></a>
+ <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./data gathering.html" rel="" target="">
@@ -137,6 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./data cleaning.html" rel="" target="">
  <span class="menu-text">Data Cleaning</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Naïve Bayes.html" rel="" target="">
@@ -153,6 +165,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link active" href="./Decision Tree.html" rel="" target="" aria-current="page">
  <span class="menu-text">Decision Tree</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html" rel="" target="">
+ <span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -176,7 +192,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#class-distribution-and-baseline-model-for-comparison" id="toc-class-distribution-and-baseline-model-for-comparison" class="nav-link" data-scroll-target="#class-distribution-and-baseline-model-for-comparison">Class distribution and Baseline model for comparison</a></li>
   <li><a href="#model-tuning" id="toc-model-tuning" class="nav-link" data-scroll-target="#model-tuning">Model tuning</a></li>
   <li><a href="#final-results" id="toc-final-results" class="nav-link" data-scroll-target="#final-results">Final results</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -210,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>However, Decision Trees can sometimes oversimplify or overfit the data. This means they might not perform well when faced with new, unseen data because they’ve become too tailored to the specific data they were trained on.</p>
 <p>To address this, we often use the Random Forest (RF) approach. This method combines the predictions of multiple Decision Trees to improve accuracy and reliability. Each tree in a Random Forest is built from a randomly selected subset of the data, making each tree a bit different. When it’s time to make a prediction, the Random Forest takes an average or a majority vote of all these trees. This ensemble approach helps in balancing out biases and errors of individual trees, leading to better performance on new, unseen data.</p>
 <p>From a big-picture perspective, both Decision Trees and Random Forests are methods used to analyze complex datasets and make predictions. They are particularly useful in situations where the relationships in the data are not immediately obvious. In the context of stock prices, these methods help in identifying patterns and trends that might indicate future price movements, offering valuable insights for decision-making processes.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
@@ -222,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> AAPL.drop(columns<span class="op">=</span>[<span class="st">'Unnamed: 0'</span>, <span class="st">'timestamp'</span>, <span class="st">'open'</span>, <span class="st">'close'</span>])</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -239,38 +254,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">1</td>
-<td>170.9000</td>
-<td>167.90</td>
-<td>44846017</td>
-<td>-1.839398</td>
+<td>190.05</td>
+<td>187.4511</td>
+<td>43389519</td>
+<td>-2.062868</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2</td>
-<td>171.1700</td>
-<td>168.87</td>
-<td>51130955</td>
-<td>-0.281080</td>
+<td>191.56</td>
+<td>189.2300</td>
+<td>45704823</td>
+<td>0.955498</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td>168.9600</td>
-<td>166.83</td>
-<td>58499129</td>
-<td>-1.215573</td>
+<td>190.32</td>
+<td>188.1900</td>
+<td>48794366</td>
+<td>-0.674545</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4</td>
-<td>171.3775</td>
-<td>165.67</td>
-<td>70625258</td>
-<td>-0.790631</td>
+<td>192.09</td>
+<td>188.9700</td>
+<td>43014224</td>
+<td>-0.305344</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>173.0600</td>
-<td>170.65</td>
-<td>57156962</td>
-<td>2.522620</td>
+<td>191.08</td>
+<td>189.4000</td>
+<td>38415419</td>
+<td>0.543909</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
@@ -280,48 +295,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>...</td>
 </tr>
 <tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>186.99</td>
+<td>184.2700</td>
+<td>101256225</td>
+<td>-0.048646</td>
+</tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">119</td>
-<td>174.0600</td>
-<td>171.00</td>
-<td>45533138</td>
-<td>0.290579</td>
+<td>186.52</td>
+<td>183.7800</td>
+<td>65433166</td>
+<td>0.589444</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td data-quarto-table-cell-role="th">120</td>
-<td>174.5900</td>
-<td>172.17</td>
-<td>49514676</td>
-<td>0.683780</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">121</td>
-<td>174.0300</td>
-<td>171.90</td>
-<td>53724501</td>
-<td>-0.112230</td>
+<td>184.39</td>
+<td>182.0200</td>
+<td>57462882</td>
+<td>-1.107467</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">122</td>
-<td>173.5400</td>
-<td>171.60</td>
-<td>45326874</td>
-<td>-1.028492</td>
+<td data-quarto-table-cell-role="th">121</td>
+<td>184.15</td>
+<td>182.4400</td>
+<td>54929129</td>
+<td>-0.347921</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">123</td>
-<td>173.8500</td>
-<td>172.11</td>
-<td>55962793</td>
-<td>1.007161</td>
+<td data-quarto-table-cell-role="th">122</td>
+<td>183.89</td>
+<td>180.9700</td>
+<td>54754995</td>
+<td>0.261852</td>
 </tr>
 </tbody>
 </table>
 
-<p>123 rows × 4 columns</p>
+<p>122 rows × 4 columns</p>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'high'</span>, <span class="st">'low'</span>]]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'daily_return'</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'daily_return'</span>].fillna(df[<span class="st">'daily_return'</span>].mean(), inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -336,14 +351,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>rmse, model</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>(1.2410364517972974, DecisionTreeRegressor(random_state=42))</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(1.3036617804945074, DecisionTreeRegressor(random_state=42))</code></pre>
 </div>
 </div>
 </section>
 <section id="class-distribution-and-baseline-model-for-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="class-distribution-and-baseline-model-for-comparison">Class distribution and Baseline model for comparison</h2>
-<div class="cell" data-execution_count="43">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -380,15 +395,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>return_class
 0    69
-1    55
+1    54
 Name: count, dtype: int64</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="43">
-<pre><code>((0.56, 0.45454545454545453, 0.5), (0.4, 0.2222222222222222, 0.2))</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>((0.56, 0.36363636363636365, 0.5), (0.56, 0.3333333333333333, 0.375))</code></pre>
 </div>
 </div>
 <p>The classification typically classify the dataset into 2 groups, positive daily return and negative daily return. The dataset is raletively balanced as it has almost half and half for both 0 and 1. The uniform strategy classifier performs better than the stratified classifier, with a higher accuracy of 56%.</p>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -403,7 +418,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="model-tuning" class="level2">
 <h2 class="anchored" data-anchor-id="model-tuning">Model tuning</h2>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -428,1250 +443,24 @@ Name: count, dtype: int64</code></pre>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">8</span>))</span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plot_tree(optimal_model, filled<span class="op">=</span><span class="va">True</span>, feature_names<span class="op">=</span>feature_names_list)</span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/base.py:348: InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.3.0 when using version 1.3.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
-https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
-  warnings.warn(</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Best parameters: {'max_depth': 1, 'min_samples_leaf': 1, 'min_samples_split': 2}
-Best score: -0.23203288456551663</code></pre>
+<pre><code>Best parameters: {'max_depth': 1, 'min_samples_leaf': 8, 'min_samples_split': 2}
+Best score: -0.25854706191243626</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Decision Tree_files/figure-html/cell-6-output-3.png" class="img-fluid"></p>
+<p><img src="Decision Tree_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted'</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True'</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True'</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Decision Tree_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
@@ -1680,13 +469,7 @@ Best score: -0.23203288456551663</code></pre>
 <section id="final-results" class="level2">
 <h2 class="anchored" data-anchor-id="final-results">Final results</h2>
 <p>The optimal decision tree has too few leaves, it might due to that the dataset does not fit the decision tree algorithm very well. It could be imporved by setting other parameters but those might not be the optimal choice.</p>
-<p>The plot of confusion matrix shows that the there’s a high number of correct prediction (11 on true positive, 6 on false negative) and small number of incorrect prediction (4 on false positive and 4 on true negative), indicating that the model overall perform well in predicting.</p>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>In our analysis of Apple’s stock prices, the decision tree model we used to predict daily returns turned out to be quite basic, with only two outcomes. This indicates that the model may not fully capture the complexities and variables that drive the stock market’s fluctuations. The model’s simplicity could suggest that it’s not adequately tailored to the nuances of stock price movements. Stock prices can be influenced by a number of factors, ranging from company performance and investor sentiment to broader economic indicators. A model with only two branches may not account for these diverse influences adequately.</p>
-<p>However, even with its limited structure, the model managed to correctly predict the direction of stock price movement with a degree of accuracy. While it certainly didn’t catch every nuance, the high number of correct predictions indicates that the model has captured some underlying trends in the data. It seems to have identified a basic pattern in the stock’s movements that, more often than not, pointed in the right direction.</p>
-<p>The key takeaway here is that while the decision tree provided some correct predictions, its oversimplified structure suggests there is much room for improvement. By incorporating more data or trying different modeling techniques, we might develop a more sophisticated model that can better navigate the intricacies of stock market predictions. With further refinement, we aim to enhance the accuracy and reliability of our predictions, ultimately striving for a model that closely aligns with the dynamic nature of the stock market.</p>
+<p>The plot of confusion matrix shows that the there’s a high number of correct prediction (13 on true positive, 3 on false negative) and small number of incorrect prediction (5 on false positive and 4 on true negative), indicating that the model overall perform well in predicting.</p>
 
 
 </section>

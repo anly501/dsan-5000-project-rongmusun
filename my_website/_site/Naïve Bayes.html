@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5000 Homework 1 - Naïve Bayes</title>
+<title>Stock Price Analysis - Naïve Bayes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">5000 Homework 1</span>
+    <span class="navbar-title">Stock Price Analysis</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -124,8 +124,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./code.html" rel="" target="">
+ <span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html" rel="" target="">
+ <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Data Science Topic.html" rel="" target="">
- <span class="menu-text">Data Science Topic</span></a>
+ <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./data gathering.html" rel="" target="">
@@ -134,6 +142,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./data cleaning.html" rel="" target="">
  <span class="menu-text">Data Cleaning</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./Naïve Bayes.html" rel="" target="" aria-current="page">
@@ -150,6 +162,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./Decision Tree.html" rel="" target="">
  <span class="menu-text">Decision Tree</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html" rel="" target="">
+ <span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -170,7 +186,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#naïve-bayes" id="toc-naïve-bayes" class="nav-link active" data-scroll-target="#naïve-bayes">Naïve Bayes</a>
   <ul class="collapse">
   <li><a href="#introduction-to-naive-bayes" id="toc-introduction-to-naive-bayes" class="nav-link" data-scroll-target="#introduction-to-naive-bayes">Introduction to Naive Bayes</a></li>
-  <li><a href="#feature-selection-for-record-data" id="toc-feature-selection-for-record-data" class="nav-link" data-scroll-target="#feature-selection-for-record-data">Feature Selection for record data</a></li>
   <li><a href="#naïve-bayes-nb-with-labeled-record-data" id="toc-naïve-bayes-nb-with-labeled-record-data" class="nav-link" data-scroll-target="#naïve-bayes-nb-with-labeled-record-data">Naïve Bayes (NB) with Labeled Record Data</a></li>
   </ul></li>
   </ul>
@@ -206,204 +221,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Gaussian Naive Bayes: Gaussian is best used in cases where features are continuous and can be assumed to have a Gaussian distribution. It assumes that features follow a normal distribution. Instead of using discrete counts, it uses the mean and variance of the features to estimate the probabilities. If the features are continuous, it assumes that these features are sampled from a Gaussian distribution (bell curve).</p>
 <p>Multinomial Naive Bayes: Multinomial is primarily used for document classification problems where the features are related to word counts or frequencies within the documents. This model is based on frequency counts. It calculates the likelihood of each outcome based on the frequency count of the features. The probabilities are then estimated for the new instance using these counts. It can handle the frequency of occurrences of outcomes in a dataset and is particularly useful for text classification.</p>
 <p>Bernoulli Naive Bayes: Bernoulli is suitable for datasets where features are binary or boolean, such as text classification where the presence or absence of a feature is more informative than frequency counts. It works similarly to the Multinomial Naive Bayes but with binary variables. It uses the Bernoulli distribution and assumes all our features are binary such that they take only two values.</p>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> <span class="st">'4ce9d5ba9ae046d8b647f0993345ef7f'</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://newsapi.org/v2/everything'</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'q'</span>: <span class="st">'Apple'</span>, </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'from'</span>: <span class="st">'2023-05-08'</span>, </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'to'</span>: <span class="st">'2023-11-01'</span>, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sortBy'</span>: <span class="st">'publishedAt'</span>, </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'apiKey'</span>: api_key, </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url, params<span class="op">=</span>params)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    articles <span class="op">=</span> data[<span class="st">'articles'</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    df_articles <span class="op">=</span> pd.DataFrame(articles)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df_articles.head())</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Failed to fetch news: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>columns_of_interest <span class="op">=</span> [<span class="st">'source'</span>, <span class="st">'author'</span>, <span class="st">'title'</span>, <span class="st">'description'</span>, <span class="st">'url'</span>, <span class="st">'publishedAt'</span>, <span class="st">'content'</span>]</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>df_articles_filtered <span class="op">=</span> df_articles[columns_of_interest]</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_articles_filtered.head())</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>df_articles_filtered.to_csv(<span class="st">"AAPL_NEWS.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Failed to fetch news: 426
-                                              source  \
-0                 {'id': None, 'name': 'Biztoc.com'}   
-1  {'id': None, 'name': 'Investor's Business Daily'}   
-2               {'id': None, 'name': 'Applech2.com'}   
-3               {'id': None, 'name': 'Applech2.com'}   
-4               {'id': None, 'name': 'Applech2.com'}   
-
-                      author  \
-0              thestreet.com   
-1  Investor's Business Daily   
-2                   applech2   
-3                   applech2   
-4                   applech2   
-
-                                               title  \
-0  One tech startup has found a solution to in-pe...   
-1  Dow Jones Futures: What To Do After Big Market...   
-2  AmazonでSatechiのMacBook Pro (14/16インチ)用ハードシェルケー...   
-3  macOS 14.1 SonomaではWindow Serverのバグにより、Adobe P...   
-4  エレコム、macOS 14 Sonomaでジェスチャー機能を割り当てした際、アプリが強制終了...   
-
-                                         description  \
-0  As much as 2021 was synonymous with an enormou...   
-1  Warren Buffett's Berkshire reported strong ear...   
-2  AmazonでがSatechiのMacBook Pro (14/16インチ)用ハードシェルケ...   
-3  macOS 14.1 SonomaではWindow Serverのバグにより、Adobe P...   
-4  エレコムがmacOS 14 Sonomaでジェスチャー機能を割り当てした際、アプリが強制終了...   
-
-                                                 url           publishedAt  \
-0              https://biztoc.com/x/9a75cf0635c15ca3  2023-11-05T13:10:15Z   
-1  https://www.investors.com/market-trend/stock-m...  2023-11-05T12:44:39Z   
-2  https://applech2.com/archives/20231105-satechi...  2023-11-05T09:13:08Z   
-3  https://applech2.com/archives/20231105-macos-1...  2023-11-05T08:43:57Z   
-4  https://applech2.com/archives/20231105-elecom-...  2023-11-05T07:02:58Z   
-
-                                             content  
-0  As much as 2021 was synonymous with an enormou...  
-1  Dow Jones futures will open Sunday evening, al...  
-2  AmazonSatechiMacBook Pro (14/16)iMac 24\r\nAma...  
-3  macOS 14.1 SonomaWindow ServerAdobe PhotoshopI...  
-4  macOS 14 Sonoma v5.2.12.002\r\n20231027 (Mac)v...  </code></pre>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> pd.read_csv(<span class="st">'AAPL_Cleaned.csv'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>AAPL[<span class="st">'label'</span>] <span class="op">=</span> (AAPL[<span class="st">'close'</span>] <span class="op">&gt;</span> AAPL[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> pd.read_csv(<span class="st">'AAPL_Cleaned.csv'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>MSFT <span class="op">=</span> pd.read_csv(<span class="st">'MSFT_Cleaned.csv'</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>GOOGL <span class="op">=</span> pd.read_csv(<span class="st">'GOOGL_Cleaned.csv'</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>AMZN <span class="op">=</span> pd.read_csv(<span class="st">'AMZN_Cleaned.csv'</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>META <span class="op">=</span> pd.read_csv(<span class="st">'META_Cleaned.csv'</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>TSLA <span class="op">=</span> pd.read_csv(<span class="st">'TSLA_Cleaned.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>AAPL[<span class="st">'label'</span>] <span class="op">=</span> (AAPL[<span class="st">'close'</span>] <span class="op">&gt;</span> AAPL[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>MSFT[<span class="st">'label'</span>] <span class="op">=</span> (MSFT[<span class="st">'close'</span>] <span class="op">&gt;</span> MSFT[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>GOOGL[<span class="st">'label'</span>] <span class="op">=</span> (GOOGL[<span class="st">'close'</span>] <span class="op">&gt;</span> GOOGL[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>AMZN[<span class="st">'label'</span>] <span class="op">=</span> (AMZN[<span class="st">'close'</span>] <span class="op">&gt;</span> AMZN[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>META[<span class="st">'label'</span>] <span class="op">=</span> (META[<span class="st">'close'</span>] <span class="op">&gt;</span> META[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>TSLA[<span class="st">'label'</span>] <span class="op">=</span> (TSLA[<span class="st">'close'</span>] <span class="op">&gt;</span> TSLA[<span class="st">'close'</span>].shift(<span class="dv">1</span>)).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.dropna()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> AAPL.drop([<span class="st">'timestamp'</span>, <span class="st">'label'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> AAPL[<span class="st">'label'</span>]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>X_train, X_temp, y_train, y_temp <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.4</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>X_val, X_test, y_val, y_test <span class="op">=</span> train_test_split(X_temp, y_temp, test_size<span class="op">=</span><span class="fl">0.5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.dropna()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> AAPL.drop([<span class="st">'timestamp'</span>, <span class="st">'label'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> AAPL[<span class="st">'label'</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X_train, X_temp, y_train, y_temp <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.4</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>X_val, X_test, y_val, y_test <span class="op">=</span> train_test_split(X_temp, y_temp, test_size<span class="op">=</span><span class="fl">0.5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Split data into train and test to ensure that the model can be tuned and evaluated properly. The training set creates the model, the validation set tunes the model’s hyperparameters, and the testing set provides a final metric of how well the model is expected to perform on unseen data.</p>
 </section>
-<section id="feature-selection-for-record-data" class="level2">
-<h2 class="anchored" data-anchor-id="feature-selection-for-record-data">Feature Selection for record data</h2>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> RFE</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.drop(<span class="st">'timestamp'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.dropna()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> AAPL.drop(<span class="st">'close'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> AAPL[<span class="st">'close'</span>]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>rfe <span class="op">=</span> RFE(estimator<span class="op">=</span>model, n_features_to_select<span class="op">=</span><span class="dv">3</span>) </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>selector <span class="op">=</span> rfe.fit(X, y)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>selected_features <span class="op">=</span> feature_names[selector.support_]</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Selected features:"</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Selected features:
-Index(['open', 'high', 'low'], dtype='object')</code></pre>
-</div>
-</div>
-</section>
 <section id="naïve-bayes-nb-with-labeled-record-data" class="level2">
 <h2 class="anchored" data-anchor-id="naïve-bayes-nb-with-labeled-record-data">Naïve Bayes (NB) with Labeled Record Data</h2>
-<div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report, confusion_matrix</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>gnb <span class="op">=</span> GaussianNB()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> gnb.fit(X_train, y_train)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>val_predictions <span class="op">=</span> model.predict(X_val)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>val_accuracy <span class="op">=</span> accuracy_score(y_val, val_predictions)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation Accuracy: </span><span class="sc">{</span>val_accuracy<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_val, val_predictions))</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>test_predictions <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(y_test, test_predictions)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, test_predictions))</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="op">=</span> confusion_matrix(y_test, test_predictions)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report, confusion_matrix</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>gnb <span class="op">=</span> GaussianNB()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> gnb.fit(X_train, y_train)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>val_predictions <span class="op">=</span> model.predict(X_val)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>val_accuracy <span class="op">=</span> accuracy_score(y_val, val_predictions)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation Accuracy: </span><span class="sc">{</span>val_accuracy<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_val, val_predictions))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>test_predictions <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(y_test, test_predictions)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, test_predictions))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="op">=</span> confusion_matrix(y_test, test_predictions)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confusion_mat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Validation Accuracy: 0.6
+<pre><code>Validation Accuracy: 0.6666666666666666
               precision    recall  f1-score   support
 
-           0       0.62      0.94      0.75        16
-           1       0.00      0.00      0.00         9
+           0       0.70      0.94      0.80        17
+           1       0.00      0.00      0.00         7
 
-    accuracy                           0.60        25
-   macro avg       0.31      0.47      0.38        25
-weighted avg       0.40      0.60      0.48        25
+    accuracy                           0.67        24
+   macro avg       0.35      0.47      0.40        24
+weighted avg       0.49      0.67      0.57        24
 
-Test Accuracy: 0.44
+Test Accuracy: 0.52
               precision    recall  f1-score   support
 
-           0       0.44      1.00      0.61        11
-           1       0.00      0.00      0.00        14
+           0       0.52      0.92      0.67        13
+           1       0.50      0.08      0.14        12
 
-    accuracy                           0.44        25
-   macro avg       0.22      0.50      0.31        25
-weighted avg       0.19      0.44      0.27        25
+    accuracy                           0.52        25
+   macro avg       0.51      0.50      0.40        25
+weighted avg       0.51      0.52      0.42        25
 
-[[11  0]
- [14  0]]</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1469: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))</code></pre>
+[[12  1]
+ [11  1]]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, test_predictions) </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted'</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True'</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix for Test Set'</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Validation accuracy is approximately 66.67%, which is the proportion of total correct predictions in the validation set. Test accuracy is 52%, which is the proportion of total correct predictions in the test set.</p>
+<p>For class 0, Precision is 0.52, meaning when it predicts the negative class, it is correct 52% of the time. Recall is 0.92, meaning it correctly identifies 92% of all true negative cases. F1-score is 0.67, which is a weighted average of precision and recall for the negative class, indicating a relatively moderate performance for this class.</p>
+<p>For class 1, Precision is 0.50, indicating a coin flip’s chance of being correct when predicting the positive class. Recall is very low at 0.08, meaning it correctly identifies 8% of all true positive cases, which is quite poor. F1-score is 0.14, indicating poor performance for the positive class.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, test_predictions) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'True'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix for Test Set'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Naïve Bayes_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<p><img src="Naïve Bayes_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Validation Set Performance: The model has an accuracy of 60% on the validation set. This means that 60% of the validation set predictions were correct.</p>

@@ -163,6 +163,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./Decision Tree.html" rel="" target="">
  <span class="menu-text">Decision Tree</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html" rel="" target="">
+ <span class="menu-text">Conclusion</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -207,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Data Cleaning</h1>
 <p>In this section, we will check the raw data and clean the data that we gathered for our analysis.</p>
 <p>First, we need to check null values for each datasets. As we can see, the data we gain from this API do not have any Null values, then we need to calculate daily return for each row, to make the dataset not time-sensitive.</p>
-<div class="cell" data-execution_count="110">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#For AAPL dataset</span></span>
@@ -242,7 +246,7 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="109">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For MSFT dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>MSFT <span class="op">=</span> pd.read_csv(<span class="st">'MSFT_six_months_data.csv'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -275,7 +279,7 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="111">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For GOOGL dataset</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>GOOGL <span class="op">=</span> pd.read_csv(<span class="st">'GOOGL_six_months_data.csv'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -308,7 +312,7 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="112">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For AMZN dataset</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AMZN <span class="op">=</span> pd.read_csv(<span class="st">'AMZN_six_months_data.csv'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -341,7 +345,7 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="113">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For META dataset</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>META <span class="op">=</span> pd.read_csv(<span class="st">'META_six_months_data.csv'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -374,7 +378,7 @@ volume         int64
 dtype: object</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="114">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For TSLA dataset</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>TSLA <span class="op">=</span> pd.read_csv(<span class="st">'TSLA_six_months_data.csv'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>

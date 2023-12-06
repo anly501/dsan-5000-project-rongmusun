@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DSAN-5100: Project - Clustering</title>
+<title>Stock Price Analysis - Conclusion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,6 +61,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -70,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">DSAN-5100: Project</span>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Stock Price Analysis</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -81,16 +82,56 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../clustering/clustering.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code.html" rel="" target="">
+ <span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html" rel="" target="">
+ <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Data Science Topic.html" rel="" target="">
+ <span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data gathering.html" rel="" target="">
+ <span class="menu-text">Data Gathering</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data cleaning.html" rel="" target="">
+ <span class="menu-text">Data Cleaning</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Naïve Bayes.html" rel="" target="">
+ <span class="menu-text">Naïve Bayes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Dimensionality reduction.html" rel="" target="">
+ <span class="menu-text">Dimensionality reduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Clustering.html" rel="" target="">
  <span class="menu-text">Clustering</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../eda/eda.html" rel="" target="">
- <span class="menu-text">Data Exploration</span></a>
+    <a class="nav-link" href="./Decision Tree.html" rel="" target="">
+ <span class="menu-text">Decision Tree</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./conclusion.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -104,14 +145,23 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link active" data-scroll-target="#naive-bayes">Naive Bayes</a></li>
+  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction">Dimensionality Reduction</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">Clustering</a></li>
+  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree">Decision Tree</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Clustering</h1>
+<h1 class="title">Conclusion</h1>
 </div>
 
 
@@ -126,9 +176,26 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Build out your website tab for “clustering”</p>
+<section id="naive-bayes" class="level2">
+<h2 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h2>
+<p>Our Naive Bayes classifier seems to struggle significantly with this particular task, especially in correctly predicting the positive class for AAPL stock price movement. The large number of false negatives implies that the model often predicts that the stock price will not increase when, in fact, it does. This could be particularly problematic if the model is used for investment decisions, as it would suggest missing out on potential gains. The low recall for the positive class suggests that the features used to predict the stock price increase are not capturing the patterns effectively, or that the Naive Bayes assumption of feature independence does not hold well for this financial data. Overall, while the model may be moderately accurate in identifying days when the stock price won’t increase, it is not reliable for predicting increases in stock price. For any practical application, such as trading, this model would likely require significant improvement or a different modeling approach to be useful.</p>
+</section>
+<section id="dimensionality-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="dimensionality-reduction">Dimensionality Reduction</h2>
+<p>We create t-SNE (t-Distributed Stochastic Neighbor Embedding) visualizations for different values of perplexity (5, 30, 50, 75), applied to a dataset concerning Apple (AAPL) stock prices. At the perplexity of 50, the points are clearly forming distinct clusters, with gaps between them. This indicates that the global structure is emphasized, and the algorithm is finding more meaningful clusters within the data. It suggests that there are clusters within the AAPL stock price dataset that can be more or less emphasized by adjusting the perplexity parameter.</p>
+</section>
+<section id="clustering" class="level2">
+<h2 class="anchored" data-anchor-id="clustering">Clustering</h2>
+<p>The optimal number of clusters for KMeans is 3, and the cluster we create from KMeans and Agglomerative is similar. DBSCAN’s silhouette score suggests that the clustering structure is weak, with a score of approximately 0.25, which is relatively low, indicating DBSCAN might not be the most appropriate method for this dataset. The clusters formed by the Agglomerative Clustering with Ward linkage seem to be relatively well-defined, producing more defined and possibly more meaningful clusters for Apple’s stock price.</p>
+</section>
+<section id="decision-tree" class="level2">
+<h2 class="anchored" data-anchor-id="decision-tree">Decision Tree</h2>
+<p>In our analysis of Apple’s stock prices, the decision tree model we used to predict daily returns turned out to be quite basic, with only two outcomes. This indicates that the model may not fully capture the complexities and variables that drive the stock market’s fluctuations. The model’s simplicity could suggest that it’s not adequately tailored to the nuances of stock price movements. Stock prices can be influenced by a number of factors, ranging from company performance and investor sentiment to broader economic indicators. A model with only two branches may not account for these diverse influences adequately.</p>
+<p>However, even with its limited structure, the model managed to correctly predict the direction of stock price movement with a degree of accuracy. While it certainly didn’t catch every nuance, the high number of correct predictions indicates that the model has captured some underlying trends in the data. It seems to have identified a basic pattern in the stock’s movements that, more often than not, pointed in the right direction.</p>
+<p>The key takeaway here is that while the decision tree provided some correct predictions, its oversimplified structure suggests there is much room for improvement. By incorporating more data or trying different modeling techniques, we might develop a more sophisticated model that can better navigate the intricacies of stock market predictions. With further refinement, we aim to enhance the accuracy and reliability of our predictions, ultimately striving for a model that closely aligns with the dynamic nature of the stock market.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5000 Homework 1 - Clustering</title>
+<title>Stock Price Analysis - Clustering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">5000 Homework 1</span>
+    <span class="navbar-title">Stock Price Analysis</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,8 +127,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">About me</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./code.html" rel="" target="">
+ <span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html" rel="" target="">
+ <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Data Science Topic.html" rel="" target="">
- <span class="menu-text">Data Science Topic</span></a>
+ <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./data gathering.html" rel="" target="">
@@ -137,6 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./data cleaning.html" rel="" target="">
  <span class="menu-text">Data Cleaning</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Data Exploration</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Naïve Bayes.html" rel="" target="">
@@ -153,6 +165,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./Decision Tree.html" rel="" target="">
  <span class="menu-text">Decision Tree</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html" rel="" target="">
+ <span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -225,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-selection" class="level3">
 <h3 class="anchored" data-anchor-id="data-selection">Data selection</h3>
 <p>Select the trading volumn and daily return.</p>
-<div class="cell" data-execution_count="37">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -235,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> pd.read_csv(<span class="st">'AAPL_Cleaned.csv'</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>AAPL.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -257,57 +273,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>0</td>
-<td>2023-11-01</td>
-<td>171.00</td>
-<td>174.2300</td>
-<td>170.13</td>
-<td>173.97</td>
-<td>56807811</td>
+<td>2023-12-05</td>
+<td>190.21</td>
+<td>194.40</td>
+<td>190.1800</td>
+<td>193.42</td>
+<td>66628398</td>
 <td>NaN</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>1</td>
-<td>2023-10-31</td>
-<td>169.35</td>
-<td>170.9000</td>
-<td>167.90</td>
-<td>170.77</td>
-<td>44846017</td>
-<td>-1.839398</td>
+<td>2023-12-04</td>
+<td>189.98</td>
+<td>190.05</td>
+<td>187.4511</td>
+<td>189.43</td>
+<td>43389519</td>
+<td>-2.062868</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>2</td>
-<td>2023-10-30</td>
-<td>169.02</td>
-<td>171.1700</td>
-<td>168.87</td>
-<td>170.29</td>
-<td>51130955</td>
-<td>-0.281080</td>
+<td>2023-12-01</td>
+<td>190.33</td>
+<td>191.56</td>
+<td>189.2300</td>
+<td>191.24</td>
+<td>45704823</td>
+<td>0.955498</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>3</td>
-<td>2023-10-27</td>
-<td>166.91</td>
-<td>168.9600</td>
-<td>166.83</td>
-<td>168.22</td>
-<td>58499129</td>
-<td>-1.215573</td>
+<td>2023-11-30</td>
+<td>189.84</td>
+<td>190.32</td>
+<td>188.1900</td>
+<td>189.95</td>
+<td>48794366</td>
+<td>-0.674545</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>4</td>
-<td>2023-10-26</td>
-<td>170.37</td>
-<td>171.3775</td>
-<td>165.67</td>
-<td>166.89</td>
-<td>70625258</td>
-<td>-0.790631</td>
+<td>2023-11-29</td>
+<td>190.90</td>
+<td>192.09</td>
+<td>188.9700</td>
+<td>189.37</td>
+<td>43014224</td>
+<td>-0.305344</td>
 </tr>
 </tbody>
 </table>
@@ -318,12 +334,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="feature-selection" class="level3">
 <h3 class="anchored" data-anchor-id="feature-selection">Feature Selection</h3>
-<div class="cell" data-execution_count="38">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.drop(<span class="st">'timestamp'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.drop(<span class="st">'Unnamed: 0'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> AAPL.dropna()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>AAPL.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -342,48 +358,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">1</td>
-<td>169.35</td>
-<td>170.9000</td>
-<td>167.90</td>
-<td>170.77</td>
-<td>44846017</td>
-<td>-1.839398</td>
+<td>189.98</td>
+<td>190.05</td>
+<td>187.4511</td>
+<td>189.43</td>
+<td>43389519</td>
+<td>-2.062868</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2</td>
-<td>169.02</td>
-<td>171.1700</td>
-<td>168.87</td>
-<td>170.29</td>
-<td>51130955</td>
-<td>-0.281080</td>
+<td>190.33</td>
+<td>191.56</td>
+<td>189.2300</td>
+<td>191.24</td>
+<td>45704823</td>
+<td>0.955498</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td>166.91</td>
-<td>168.9600</td>
-<td>166.83</td>
-<td>168.22</td>
-<td>58499129</td>
-<td>-1.215573</td>
+<td>189.84</td>
+<td>190.32</td>
+<td>188.1900</td>
+<td>189.95</td>
+<td>48794366</td>
+<td>-0.674545</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4</td>
-<td>170.37</td>
-<td>171.3775</td>
-<td>165.67</td>
-<td>166.89</td>
-<td>70625258</td>
-<td>-0.790631</td>
+<td>190.90</td>
+<td>192.09</td>
+<td>188.9700</td>
+<td>189.37</td>
+<td>43014224</td>
+<td>-0.305344</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">5</td>
-<td>171.88</td>
-<td>173.0600</td>
-<td>170.65</td>
-<td>171.10</td>
-<td>57156962</td>
-<td>2.522620</td>
+<td>189.78</td>
+<td>191.08</td>
+<td>189.4000</td>
+<td>190.40</td>
+<td>38415419</td>
+<td>0.543909</td>
 </tr>
 </tbody>
 </table>
@@ -396,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="hyper-parameter-tuning">Hyper-parameter tuning</h3>
 <section id="k-means" class="level4">
 <h4 class="anchored" data-anchor-id="k-means">K-Means</h4>
-<div class="cell" data-execution_count="39">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_scaled <span class="op">=</span> scaler.fit_transform(AAPL)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sse <span class="op">=</span> []</span>
@@ -405,29 +421,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(df_scaled)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    sse.append(kmeans.inertia_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="40">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>), sse)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Elbow Method for Determining k'</span>)</span>
@@ -442,12 +458,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dbscan" class="level4">
 <h4 class="anchored" data-anchor-id="dbscan">DBSCAN</h4>
-<div class="cell" data-execution_count="51">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="52">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dbscan <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.5</span>, min_samples<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AAPL[<span class="st">'Cluster'</span>] <span class="op">=</span> dbscan.fit_predict(df_scaled)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>eps_values <span class="op">=</span> np.arange(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.1</span>)</span>
@@ -471,16 +487,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                best_min_samples <span class="op">=</span> min_samples</span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best silhouette score is </span><span class="sc">{</span>best_silhouette_score<span class="sc">}</span><span class="ss"> with eps=</span><span class="sc">{</span>best_eps<span class="sc">}</span><span class="ss"> and min_samples=</span><span class="sc">{</span>best_min_samples<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Best silhouette score is 0.35123741099363287 with eps=0.8 and min_samples=3</code></pre>
+<pre><code>Best silhouette score is 0.25298680124699197 with eps=0.9 and min_samples=8</code></pre>
 </div>
 </div>
 </section>
 <section id="hierarchical---agglomerative-clustering" class="level4">
 <h4 class="anchored" data-anchor-id="hierarchical---agglomerative-clustering">Hierarchical - Agglomerative Clustering</h4>
-<div class="cell" data-execution_count="53">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="54">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>num_clusters <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">10</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>silhouette_scores <span class="op">=</span> {}</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -496,26 +512,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>best_agg_clustering <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span>best_num_clusters, affinity<span class="op">=</span><span class="st">'euclidean'</span>, linkage<span class="op">=</span><span class="st">'ward'</span>)</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>best_cluster_labels <span class="op">=</span> best_agg_clustering.fit_predict(df_scaled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Best number of clusters based on silhouette score: 3</code></pre>
+<pre><code>Best number of clusters based on silhouette score: 2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(
-/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1005: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
+/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_agglomerative.py:1006: FutureWarning: Attribute `affinity` was deprecated in version 1.2 and will be removed in 1.4. Use `metric` instead
   warnings.warn(</code></pre>
 </div>
 </div>
@@ -526,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>K-Means: k=3</p>
 <p>DBSCAN: min_samples=3, eps=0.8</p>
 <p>Agglomerative: n_clusters=3</p>
-<div class="cell" data-execution_count="63">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>AAPL_reduced <span class="op">=</span> pca.fit_transform(AAPL)</span>
@@ -549,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1412: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
+<pre><code>/Users/srongmu/anaconda3/lib/python3.10/site-packages/sklearn/cluster/_kmeans.py:1416: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
   super()._check_params_vs_input(X, default_n_init=10)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
