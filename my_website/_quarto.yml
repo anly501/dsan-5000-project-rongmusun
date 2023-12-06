@@ -29,7 +29,7 @@ website:
         text: Clustering
       - href: Decision Tree.ipynb
         text: Decision Tree
-      - href: Conclusion
+      - href: conclusion.ipynb
         text: Conclusion
 
 format:
